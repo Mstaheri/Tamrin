@@ -7,10 +7,18 @@ Console.WriteLine("Hello, World!");
 // update
 var CartUpdate = new CartUpdateLinq();
 var product = new Product("سیب", 13000);
-CartUpdate.Update(product);
+var result = CartUpdate.Update(product);
+if (result.Success == true)
+{
+    //sms
+    SmsSender Sms = new SmsSender(new KaveNegar());
+    Sms.Send("اپدیت شد", "09306994906");
+}
+else
+{
+    Console.WriteLine(result.message);
+}
 
 
 
-//sms
-SmsSender Sms = new SmsSender(new KaveNegar());
-Sms.Send("اپدیت شد", "09306994906");
+
